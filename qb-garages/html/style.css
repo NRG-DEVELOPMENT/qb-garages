@@ -1,0 +1,459 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Main Colors */
+    --primary: #8B5CF6;
+    --primary-dark: #6D28D9;
+    --secondary: #1E1B4B;
+    --dark: #0F172A;
+    --darker: #020617;
+    
+    /* Text Colors */
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    
+    /* Status Colors */
+    --success: #22C55E;
+    --success-dark: #16A34A;
+    --warning: #EAB308;
+    --warning-dark: #CA8A04;
+    --danger: #EF4444;
+    --danger-dark: #DC2626;
+    
+    /* UI Elements */
+    --surface: #1E293B;
+    --surface-light: #334155;
+    --border: rgba(148, 163, 184, 0.1);
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* Animation Speeds */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: transparent;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 1100px;
+    max-width: 90vw;
+    background: var(--dark);
+    border-radius: 24px;
+    padding: 32px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+}
+
+.container.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.garage-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-primary);
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.garage-header i {
+    color: var(--primary);
+    font-size: 28px;
+}
+
+.garage-logo {
+    height: 40px;
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.3));
+    transition: transform var(--transition-fast);
+}
+
+.garage-logo:hover {
+    transform: scale(1.05);
+}
+
+.vehicle-table {
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-right: 12px;
+}
+
+.vehicle-item {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transform: translateY(0);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.vehicle-item.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.vehicle-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+}
+
+.vehicle-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+.vehicle-name {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vehicle-name i {
+    color: var(--primary);
+}
+
+.plate {
+    color: var(--text-secondary);
+    font-size: 15px;
+    text-align: center;
+    padding: 8px 16px;
+    background: var(--surface-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mileage {
+    color: var(--text-secondary);
+    font-size: 15px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat {
+    background: var(--surface-light);
+    padding: 16px;
+    border-radius: 12px;
+    transition: all var(--transition-fast);
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.label {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.label i {
+    color: var(--primary);
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-text {
+    position: absolute;
+    right: 0;
+    top: -20px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.bar-green { 
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+}
+
+.bar-yellow { 
+    background: var(--warning);
+    box-shadow: 0 0 10px var(--warning);
+}
+
+.bar-red { 
+    background: var(--danger);
+    box-shadow: 0 0 10px var(--danger);
+}
+
+.finance-drive-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.finance-info {
+    color: var(--text-primary);
+    background: var(--surface-light);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.finance-info i {
+    color: var(--primary);
+}
+
+.drive-btn {
+    background: var(--primary);
+    color: var(--text-primary);
+    border: none;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.drive-btn:hover:not(:disabled) {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.drive-btn:disabled {
+    background: var(--surface-light);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.drive-btn.disabled {
+    background: var(--surface-light);
+    color: var(--text-muted);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface-light);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95vw;
+        padding: 20px;
+    }
+
+    .vehicle-info {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .finance-drive-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .drive-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* Add these to your existing CSS */
+
+/* Loading State */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: var(--text-secondary);
+}
+
+.loading-spinner {
+    font-size: 40px;
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+
+/* No Vehicles State */
+.no-vehicles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.no-vehicles i {
+    font-size: 48px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+/* Error State */
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: var(--danger);
+    text-align: center;
+}
+
+.error-state i {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.retry-btn {
+    background: var(--surface-light);
+    color: var(--text-primary);
+    border: none;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.retry-btn:hover {
+    background: var(--surface);
+    transform: translateY(-2px);
+}
+
+/* Tooltip */
+.tooltip {
+    position: fixed;
+    background: var(--surface);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}

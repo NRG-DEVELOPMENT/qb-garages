@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage UI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="garage-header">
+                <i class='bx bxs-car-garage'></i>
+                <span id="garage-header">Legion Square</span>
+            </div>
+            <div class="header-actions">
+                <img src="logo.png" id="garage-logo" alt="Garage Logo" class="garage-logo">
+            </div>
+        </div>
+
+        <!-- Vehicle List Container -->
+        <div class="vehicle-table" id="vehicle-container">
+            <!-- Vehicle Item Template -->
+            <template id="vehicle-template">
+                <div class="vehicle-item">
+                    <!-- Vehicle Info Section -->
+                    <div class="vehicle-info">
+                        <div class="vehicle-name">
+                            <i class='bx bxs-car'></i>
+                            <span>Vehicle Name</span>
+                        </div>
+                        <div class="plate">
+                            <i class='bx bx-card'></i>
+                            <span>ABC 123</span>
+                        </div>
+                        <div class="mileage">
+                            <i class='bx bx-trip'></i>
+                            <span>0 mi</span>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Stats Section -->
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="label">
+                                <i class='bx bx-gas-pump'></i>
+                                <span>Fuel</span>
+                            </div>
+                            <div class="progress-bar">
+                                <span class="progress-text">100%</span>
+                                <span class="bar-green"></span>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <div class="label">
+                                <i class='bx bx-cog'></i>
+                                <span>Engine</span>
+                            </div>
+                            <div class="progress-bar">
+                                <span class="progress-text">100%</span>
+                                <span class="bar-green"></span>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <div class="label">
+                                <i class='bx bx-car'></i>
+                                <span>Body</span>
+                            </div>
+                            <div class="progress-bar">
+                                <span class="progress-text">100%</span>
+                                <span class="bar-green"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions Section -->
+                    <div class="finance-drive-container">
+                        <div class="finance-info">
+                            <i class='bx bx-money'></i>
+                            <span>Paid Off</span>
+                        </div>
+                        <button class="drive-btn">
+                            <i class='bx bx-key'></i>
+                            <span>Drive</span>
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-container" id="loading-container" style="display: none;">
+            <div class="loading-spinner">
+                <i class='bx bx-loader-alt bx-spin'></i>
+            </div>
+            <span>Loading vehicles...</span>
+        </div>
+
+        <!-- No Vehicles State -->
+        <div class="no-vehicles" id="no-vehicles" style="display: none;">
+            <i class='bx bx-car'></i>
+            <span>No vehicles found in this garage</span>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-state" id="error-state" style="display: none;">
+            <i class='bx bx-error-circle'></i>
+            <span>Something went wrong</span>
+            <button class="retry-btn">
+                <i class='bx bx-refresh'></i>
+                Retry
+            </button>
+        </div>
+    </div>
+
+    <!-- Tooltips Container -->
+    <div id="tooltip" class="tooltip" style="display: none;"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
